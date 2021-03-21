@@ -26,7 +26,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Rubix982/Web-Proxy-Golang">
-    <img src="assets/img/gopher.jpg" alt="Logo" width="80" height="80">
+    <!-- <img src="assets/img/gopher.jpg" alt="Logo" width="80" height="80"> -->
   </a>
 
   <h3 align="center">Web Proxy, Golang</h3>
@@ -87,7 +87,7 @@ The notion page for this repository can be found as the following,
 
 This section should lists the technologies used,
 
-* [Go](https://golang.org/)
+<!-- * [Go](https://golang.org/) -->
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,7 +97,8 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them on Linux,
+Add prereqs here in the end
+<!-- This is an example of how to list things you need to use the software and how to install them on Linux,
 * golang, instructions retrieved from [here](https://golang.org/doc/install)
   ```sh
   wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz # get tar zip file
@@ -106,27 +107,12 @@ This is an example of how to list things you need to use the software and how to
   export PATH=$PATH:/usr/local/go/bin # You can do this by adding the following line to your $HOME/.profile or /etc/profile (for a system-wide installation):
   go version # verify golang was installed properly
   ```
-* git, download and setup instructions can be found [here](https://git-scm.com/)
+* git, download and setup instructions can be found [here](https://git-scm.com/) -->
 
 ### Installation
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/Rubix982/Web-Proxy-Golang
-   ```
-2. Install Golang packages
-   ```sh
-   go mod download
-   ```
-3. To run the `proxy.go`, simply do
-   ```sh
-    go run .
-   ```
-4. To build and run, run the following commands
-   ```sh
-    go build && ./proxy
-   ```
-    
+Add steps here later
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
