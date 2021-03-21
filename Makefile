@@ -15,6 +15,7 @@ build-prod:
 
 ## For Docker Compose, Development
 build-dev:
+	rm -rf server/server/bin server/server/obj
 	sudo docker-compose -f docker-compose.dev.yaml up --build
 
 ## For building only server image

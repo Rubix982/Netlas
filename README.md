@@ -26,7 +26,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Rubix982/Web-Proxy-Golang">
-    <!-- <img src="assets/img/gopher.jpg" alt="Logo" width="80" height="80"> -->
+    <img src="assets/img/1.jpg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Web Proxy, Golang</h3>

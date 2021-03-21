@@ -1,24 +1,6 @@
-version: "2"
+version: "3"
 
 services:
-  backend:
-    container_name: backend
-    build: ./server
-    restart: always
-    volumes:
-      - "./server:/Backend"
-    ports:
-      - "5000:5000"
-
-  client:
-    container_name: client
-    build: ./client
-    stdin_open: true
-    restart: always
-    volumes:
-      - "./client:/App"
-    ports:
-      - "8000:8000"
 
   web-server:
     container_name: web-server
@@ -30,5 +12,25 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - backend
+      - server
       - client
+
+  server:
+    container_name: backend
+    build: ./server
+    restart: always
+    volumes:
+      - "./server:/backend"      
+    ports:
+      - "80:80"
+      - "443:443"
+
+  client:
+    container_name: client
+    build: ./client
+    stdin_open: true
+    restart: always
+    volumes:
+      - "./client:/App"
+    ports:
+      - "8000:8000"
