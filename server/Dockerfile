@@ -1,33 +1,18 @@
-FROM microsoft/dotnet
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY server/*.csproj ./server/
+RUN dotnet restore -r linux-x64
 
-# Args / Env
-ARG repositoryUrl=https://github.com/ThiagoBarradas/DotNetCore.WebApi.Docker.Demo
-ARG configuration=Release
-ARG distFolder=DotNetCore.WebApi.Docker.Demo/bin/Release/netcoreapp2.1
-ARG apiPort=5000
-ARG appFile=DotNetCore.WebApi.Docker.Demo.dll
+# copy everything else and build app
+COPY server/. ./server/
+WORKDIR /source/server
+RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false --no-restore
 
-# Change to temp workspace
-WORKDIR /temp
-
-# Get code from repository
-RUN git clone ${repositoryUrl} .
-
-# Restore packages and publish app
-RUN dotnet restore
-RUN dotnet publish -c ${configuration}
-
-# Copy files to /app
-RUN mv /temp/${distFolder} /app
- 
-# Expose port for the Web API traffic
-ENV ASPNETCORE_URLS http://+:${apiPort}
-EXPOSE ${apiPort}
-
-# Clear temp files
-RUN rm -rf /temp 
-
-# Run application
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal-amd64
 WORKDIR /app
-ENV appFile=$appFile
-ENTRYPOINT dotnet $appFile
+COPY --from=build /app ./
+ENTRYPOINT ["./server"]
