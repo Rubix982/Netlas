@@ -1,3 +1,7 @@
+# Automating Scripts
+python-test:
+	python3 ./scripts/get-requests.py
+
 stop:
 	docker container stop $(docker ps -q)
 

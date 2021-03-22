@@ -5,6 +5,6 @@ namespace server
 {
     public class FilterJSON
     {
-        public List<string> DomainNames { get; set; }
+        public List<string> Domains { get; set; }
     }
 }

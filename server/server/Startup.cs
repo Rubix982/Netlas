@@ -28,6 +28,7 @@ namespace server
         {
 
             services.AddControllers();
+                // .AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "server", Version = "v1" });
