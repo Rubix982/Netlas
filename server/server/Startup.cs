@@ -43,6 +43,11 @@ namespace server
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "server v1"));
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.Use(async (context, nextMiddleware) => {
                 context.Response.OnStarting(() => {
@@ -62,11 +67,7 @@ namespace server
 
             app.UseEndpoints(endpoints =>
             {
-                // endpoints.MapControllers();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=WeatherForecast}/{action=Index}/"
-                );
+                endpoints.MapControllers();
             });
         }
     }

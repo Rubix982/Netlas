@@ -56,8 +56,11 @@ ps:
 images:
 	sudo docker images
 
-primary:
-	sudo docker exec -it primary bash
+web-server:
+	sudo docker exec -it web-server /bin/bash
 
-secondary:
-	sudo docker exec -it secondary bash
+server:
+	sudo docker exec -it backend /bin/bash
+
+client:
+	sudo docker exec -it client /bin/bash
