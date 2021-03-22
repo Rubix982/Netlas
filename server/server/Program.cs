@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Sentry;
 
 namespace server
 {
@@ -48,6 +49,8 @@ namespace server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // Add the following line:
+                    webBuilder.UseSentry("https://648c28ba5aa84b3ca6872e92ff9dbacf@o521037.ingest.sentry.io/5687909");
                     webBuilder.UseStartup<Startup>();
                 });
     }
