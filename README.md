@@ -19,6 +19,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![DepShield Badge](https://depshield.sonatype.org/badges/Rubix982/Netlas/depshield.svg)](https://depshield.github.io)
 
 
 
@@ -26,7 +27,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Rubix982/Web-Proxy-Golang">
-    <img src="assets/img/1.jpg" alt="Logo" width="80" height="80">
+    <img src="assets/img/1.jpg" alt="Logo">
   </a>
 
   <h3 align="center">Web Proxy, Golang</h3>
