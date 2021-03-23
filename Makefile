@@ -68,3 +68,9 @@ server:
 
 client:
 	sudo docker exec -it client /bin/bash
+
+cache-lru:
+	sudo docker exec -it cache-lru /bin/bash
+
+cache-mru:
+	sudo docker exec -it cache-mru /bin/bash

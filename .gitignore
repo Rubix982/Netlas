@@ -366,3 +366,6 @@ FodyWeavers.xsd
 ## Server/sever
 server/server/obj/**/**
 server/server/bin/**/**
+
+## Data from Docker, for volume mapping
+data/**/**

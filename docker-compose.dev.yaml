@@ -34,3 +34,27 @@ services:
       - "./client:/App"
     ports:
       - "8000:8000"
+ 
+  cache-lru:
+    container_name: cache-lru
+    image: redis
+    restart: always
+    ports: 
+      - "6379:6379"
+    volumes:
+      - "./data/redis-lru/redis-data:/var/lib/redis"
+      - "./data/redis-lru/redis.conf:/usr/local/etc/redis/redis.conf"
+    environment: 
+      REDIS_REPLICATION_MODE: master
+  
+  cache-mru:
+    container_name: cache-mru
+    image: redis
+    restart: always
+    ports: 
+      - "6380:6380"
+    volumes:
+      - "./data/redis-mru/redis-data:/var/lib/redis"
+      - "./data/redis-mru/redis.conf:/usr/local/etc/redis/redis.conf"
+    environment: 
+      REDIS_REPLICATION_MODE: master   
