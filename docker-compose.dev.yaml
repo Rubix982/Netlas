@@ -16,11 +16,12 @@ services:
       - client
 
   server:
-    container_name: backend
+    container_name: server
     build: ./server
     restart: always
     volumes:
-      - "./server:/backend"      
+      - "./server:/server"  
+      - "./scripts/data/encodings.csv:/app/encodings.csv"    
     ports:
       - "80:80"
       - "443:443"

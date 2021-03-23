@@ -2,6 +2,9 @@
 python-test:
 	python3 ./scripts/get-requests.py
 
+python-encodings:
+	python3 ./scripts/get-url-special-encodings.py
+
 stop:
 	docker container stop $(docker ps -q)
 
@@ -19,6 +22,7 @@ build-prod:
 
 ## For Docker Compose, Development
 build-dev:
+	make remove
 	rm -rf server/server/bin server/server/obj
 	sudo docker-compose -f docker-compose.dev.yaml up --build
 
@@ -64,7 +68,7 @@ web-server:
 	sudo docker exec -it web-server /bin/bash
 
 server:
-	sudo docker exec -it backend /bin/bash
+	sudo docker exec -it server /bin/bash
 
 client:
 	sudo docker exec -it client /bin/bash
