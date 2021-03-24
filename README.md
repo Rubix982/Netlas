@@ -26,19 +26,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Rubix982/Web-Proxy-Golang">
+  <a href="https://github.com/Rubix982/Synet">
     <img src="assets/img/1.jpg" alt="Logo">
   </a>
 
-  <h3 align="center">Web Proxy, Golang</h3>
+  <h2 align="center">ASP.NET | GatsbyJS</h2>  
+  <h3 align="center">Web Proxy</h3>
 
   <p align="center">
-    A web proxy, implemented in Golang
+    A web proxy, implemented in ASP.NET
     <br />
     <br />
-    <a href="https://github.com/Rubix982/Web-Proxy-Golang/issues">Report Bug</a>
+    <a href="https://github.com/Rubix982/Synet/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Rubix982/Web-Proxy-Golang/issues">Request Feature</a>
+    <a href="https://github.com/Rubix982/Synet/issues">Request Feature</a>
   </p>
 </p>
 
@@ -75,7 +76,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Repository for CN CS307's 1st assignment for web proxies. Please see the actual project proposal as attached [here](https://github.com/Rubix982/Web-Proxy-Golang/blob/main/assets/doc/A01-CN-SP21.pdf).
+Repository for CN CS307's 1st assignment for web proxies. Please see the actual project proposal as attached [here](https://github.com/Rubix982/Synet/blob/main/assets/doc/A01-CN-SP21.pdf).
 
 The notion page for this repository can be found as the following,
 
@@ -121,12 +122,12 @@ TODO!!!!!!!
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://github.com/Rubix982/Web-Proxy-Golang)_
+_For more examples, please refer to the [Documentation](https://github.com/Rubix982/Synet)_
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Rubix982/Web-Proxy-Golang/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Rubix982/Synet/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -142,14 +143,14 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the  Apache-2.0 License License. See [LICENSE](https://github.com/Rubix982/Web-Proxy-Golang/blob/main/LICENSE) for more information.
+Distributed under the  Apache-2.0 License License. See [LICENSE](https://github.com/Rubix982/Synet/blob/main/LICENSE) for more information.
 
 <!-- CONTACT -->
 ## Contact
 
 Your Name - [@rubix982](https://github.com/Rubix982/) - saifulislam84210@gmail.com
 
-Project Link: [https://github.com/Rubix982/Web-Proxy-Golang](https://github.com/Rubix982/Web-Proxy-Golang)
+Project Link: [https://github.com/Rubix982/Synet](https://github.com/Rubix982/Synet)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
@@ -169,15 +170,15 @@ Project Link: [https://github.com/Rubix982/Web-Proxy-Golang](https://github.com/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/rubix982/Web-Proxy-Golang.svg?style=for-the-badge
-[contributors-url]: https://github.com/Rubix982/Web-Proxy-Golang/graphs/contributors
+[contributors-url]: https://github.com/Rubix982/Synet/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Rubix982/Web-Proxy-Golang.svg?style=for-the-badge
-[forks-url]: https://github.com/Rubix982/Web-Proxy-Golang/network/members
+[forks-url]: https://github.com/Rubix982/Synet/network/members
 [stars-shield]: https://img.shields.io/github/stars/Rubix982/Web-Proxy-Golang.svg?style=for-the-badge
-[stars-url]: https://github.com/Rubix982/Web-Proxy-Golang/stargazers
+[stars-url]: https://github.com/Rubix982/Synet/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Rubix982/Web-Proxy-Golang.svg?style=for-the-badge
-[issues-url]: https://github.com/Rubix982/Web-Proxy-Golang/issues
+[issues-url]: https://github.com/Rubix982/Synet/issues
 [license-shield]: https://img.shields.io/github/license/Rubix982/Web-Proxy-Golang.svg?style=for-the-badge
-[license-url]: https://github.com/Rubix982/Web-Proxy-Golang/blob/master/LICENSE.txt
+[license-url]: https://github.com/Rubix982/Synet/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/saif-ul-islam-93786b187/
 [product-screenshot]: assets/img/screenshot.png
