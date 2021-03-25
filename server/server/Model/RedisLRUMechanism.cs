@@ -6,9 +6,9 @@ namespace server
 {
     public class RedisLRUMechanism
     {
-        public RedisDB DB { get; };
-        static private Node Head { get; set; };
-        static private Node Tail { get; set; };
+        public RedisDB DB { get; }
+        static private Node Head { get; set; }
+        static private Node Tail { get; set; }
         static private Dictionary<Int64, Node> Map = new Dictionary<Int64, Node>();
 
         static private Int64 Capacity { get; set; } = 0;
@@ -16,7 +16,7 @@ namespace server
         public RedisLRUMechanism(string hostName,
             int portNumber, Int64 capacity)
         {
-            DB = new RedisDB(1)
+            DB = new RedisDB(1);
             DB.Host.AddwriteHost(hostName, portNumber);
             Capacity = capacity;
         }

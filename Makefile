@@ -22,9 +22,8 @@ build-prod:
 
 ## For Docker Compose, Development
 build-dev:
-	make remove
-	rm -rf server/server/bin server/server/obj
-	sudo docker-compose -f docker-compose.dev.yaml up --build
+	sudo chmod +x scripts/build-dev.sh
+	./scripts/build-dev.sh
 
 ## For building only server image
 build-server:
