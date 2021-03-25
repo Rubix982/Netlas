@@ -181,4 +181,4 @@ Project Link: [https://github.com/Rubix982/Synet](https://github.com/Rubix982/Sy
 [license-url]: https://github.com/Rubix982/Synet/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/saif-ul-islam-93786b187/
-[product-screenshot]: assets/img/screenshot.png
+[product-screenshot]: https://raw.githubusercontent.com/Rubix982/Synet/main/assets/img/screenshot.png
