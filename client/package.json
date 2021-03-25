@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-paperbase",
+  "name": "synet",
   "version": "1.0.0",
-  "description": "A Gatsby Starter for using Material UI's Paperbase premium theme.  Great for making admin tools and dashboards.",
+  "description": "A Gatsby Starter using Material UI's Paperbase premium theme. Used as Synet's dashborad",
   "main": "index.js",
-  "repository": "https://github.com/willcode4food/gatsby-starter-paperbase",
-  "author": "Marc Arbesman marbesman@gmail.com",
+  "repository": "https://github.com/rubix982/synet",
+  "author": "Saif Ul Islam saifulislam84210@gmail.com",
   "license": "MIT",
   "private": false,
   "dependencies": {

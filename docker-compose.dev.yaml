@@ -3,7 +3,7 @@ version: "3"
 services:
 
   web-server:
-    container_name: web-server
+    container_name: web-server-synet
     build: ./web-server
     restart: always
     volumes:
@@ -16,7 +16,7 @@ services:
       - client
 
   server:
-    container_name: server
+    container_name: server-synet
     build: ./server
     restart: always
     volumes:
@@ -27,7 +27,7 @@ services:
       - "443:443"
 
   client:
-    container_name: client
+    container_name: client-synet
     build: ./client
     stdin_open: true
     restart: always
@@ -37,7 +37,7 @@ services:
       - "8000:8000"
  
   cache-lru:
-    container_name: cache-lru
+    container_name: cache-lru-synet
     image: redis
     restart: always
     ports: 
@@ -49,7 +49,7 @@ services:
       REDIS_REPLICATION_MODE: master
   
   cache-mru:
-    container_name: cache-mru
+    container_name: cache-mru-synet
     image: redis
     restart: always
     ports: 

@@ -75,7 +75,7 @@ function Header({ classes, onDrawerToggle, title }) {
 						</Grid>
 						<Grid item>
 							<IconButton color="inherit" className={classes.iconButtonAvatar}>
-								<Avatar className={classes.avatar} src="/images/avatar.jpg" />
+								<Avatar className={classes.avatar} src="/images/synet.jpg" />
 							</IconButton>
 						</Grid>
 					</Grid>
@@ -86,7 +86,7 @@ function Header({ classes, onDrawerToggle, title }) {
 					<Grid container alignItems="center" spacing={8}>
 						<Grid item xs>
 							<Typography style={{ textTransform: 'capitalize' }} color="inherit" variant="h5">
-								{title}
+								{title} Admin Panel
 							</Typography>
 						</Grid>
 						<Grid item>
