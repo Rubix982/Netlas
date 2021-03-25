@@ -6,7 +6,7 @@ namespace server
 {
     public class RedisLFUMechanism
     {
-        // public RedisDB DB { get; set; }
+        public RedisDB DB { get; set; }
 
         static private Int64 Capacity { get; set; }
         private Int64 Minimum { get; set; }
@@ -22,9 +22,9 @@ namespace server
         public RedisLFUMechanism(string hostName,
             int portNumber, Int64 capacity)
         {
-            // DB = new RedisDB(2);
-            // DB.Host.AddwriteHost(hostName, portNumber);
-            // Capacity = capacity;
+            DB = new RedisDB(2);
+            DB.Host.AddWriteHost(hostName, portNumber);
+            Capacity = capacity;
             Vals = new Dictionary<Int64, Int64>();
             Counts = new Dictionary<Int64, Int64>();
             Lists = new Dictionary<Int64, LinkedHashSet<Int64>>();

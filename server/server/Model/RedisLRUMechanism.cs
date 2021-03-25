@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using BeetleX.Redis;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace server
 {
@@ -17,7 +19,7 @@ namespace server
             int portNumber, Int64 capacity)
         {
             DB = new RedisDB(1);
-            DB.Host.AddwriteHost(hostName, portNumber);
+            DB.Host.AddWriteHost(hostName, portNumber);
             Capacity = capacity;
         }
 
