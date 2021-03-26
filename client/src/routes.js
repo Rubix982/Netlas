@@ -10,6 +10,7 @@ import ProductList from 'src/pages/ProductList';
 import Register from 'src/pages/Register';
 import Settings from 'src/pages/Settings';
 import Forbidden from 'src/pages/Forbidden';
+import BadRequest from 'src/pages/BadRequest';
 
 const routes = [
   {
@@ -32,6 +33,7 @@ const routes = [
       { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
       { path: '/forbidden', element: <Forbidden /> },
+      { path: '/badrequest', element: <BadRequest /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> },
     ]

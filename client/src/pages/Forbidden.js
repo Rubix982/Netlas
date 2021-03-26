@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import ForbiddenContent from 'src/components/forbidden/MainContent';
 
 function Forbidden() {
@@ -9,7 +8,4 @@ function Forbidden() {
     </div>
   );
 }
-// Forbidden.propTypes = {
-//   location: PropTypes.object,
-// };
 export default Forbidden;
