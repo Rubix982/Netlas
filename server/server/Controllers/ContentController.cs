@@ -15,20 +15,20 @@ namespace server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RequestController : ControllerBase
+    public class ContentController : ControllerBase
     {
-        private readonly ILogger<RequestController> _logger;
+        private readonly ILogger<ContentController> _logger;
         private String path = @"data.json";
         private String data = "";
         private String capturedResponseContent = "";
 
-        public RequestController(ILogger<RequestController> logger)
+        public ContentController(ILogger<ContentController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet("")]
-        public async Task<server.Request> Domain(string domain,
+        public async Task<string> Domain(string domain,
             Int32 clientId,
             Int32 requestId)
         {
@@ -55,29 +55,17 @@ namespace server.Controllers
                 $"www.{name}" == domain ||
                 $"{name}" == domain)
                 {
-                    server.Request response = new server.Request()
-                    {
-                        Domain = name,
-                        Content = "Forbidden Yaar!\nAdministrator se baat kerni paregi",
-                        Title = name,
-                        ClientId = clientId,
-                        RequestId = requestId,
-                        StatusCode = 500
-                    };
-
-                    return response;
+                    Redirect("http://172.30.0.5:3000/forbidden");
                 }
             }
 
-            Console.WriteLine(domain);
             domain = ConvertToUTF8Standard(domain);
-            Console.WriteLine(domain);
 
             // Make HTTP request, yay! Finally
             return await HttpInvokeGetAsync(domain, clientId, requestId);
         }
 
-        private async Task<server.Request>
+        private async Task<string>
             HttpInvokeGetAsync(string uri,
             Int32 clientId,
             Int32 requestId)
@@ -94,42 +82,15 @@ namespace server.Controllers
             {
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
                 Console.WriteLine("Message :{0} ", e.Message);
-                Task<server.Request> t1 = Task<server.Request>.Run(() =>
-                {
-                    server.Request response = new server.Request()
-                    {
-                        Domain = uri,
-                        Content = e.Message,
-                        Title = uri,
-                        ClientId = clientId,
-                        RequestId = requestId,
-                        StatusCode = 400 // Bad Request, apparently. :S
-                    };
 
-                    return response;
-                });
-
-                return await t1;
+                Redirect("http://172.30.0.5:3000/badrequest");
             }
-
-            // Console.WriteLine($"{captured}");
 
             try
             {
-                Task<server.Request> t2 = Task<server.Request>.Run(() =>
+                Task<string> t2 = Task<string>.Run(() =>
                 {
-                    Console.WriteLine(uri);
-                    server.Request response = new server.Request()
-                    {
-                        Domain = uri.Substring(11, uri.Length - 11),
-                        Content = capturedResponseContent,
-                        Title = uri.Substring(11, uri.Length - 11),
-                        ClientId = clientId,
-                        RequestId = requestId,
-                        StatusCode = 200 // OK!!!! :D
-                    };
-
-                    return response;
+                    return capturedResponseContent;
                 });
 
                 return await t2;
@@ -138,18 +99,12 @@ namespace server.Controllers
             {
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while initiating Response object!");
                 Console.WriteLine("Message :{0} ", e.Message);
-                server.Request response = new server.Request()
-                {
-                    Domain = uri.Substring(0, 11),
-                    Content = e.Message,
-                    Title = uri.Substring(0, 11),
-                    ClientId = clientId,
-                    RequestId = requestId,
-                    StatusCode = 200 // OK!!!! :D
-                };
 
-                return response;
+                // Redirecting to bad request
+                Redirect("http://172.30.0.5:3000/badrequest");                
             }
+
+            return "No content found";
         }
 
         static async Task<string> AsyncResourceAlloc(HttpClient client, string uri)
@@ -213,10 +168,10 @@ namespace server.Controllers
                 while (csv.Read())
                 {
                     server.Encoding record = csv.GetRecord<Encoding>();
-                    if ( uri.Contains(record.UTF8String) )
+                    if (uri.Contains(record.UTF8String))
                     {
                         uri.Replace(record.UTF8String, record.UTF8Encoding);
-                    } 
+                    }
                 }
                 return uri;
             }
