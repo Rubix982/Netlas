@@ -22,7 +22,7 @@ build-prod:
 
 ## For Docker Compose, Development
 build-dev:
-	sudo chmod +x scripts/build-dev.sh
+	sudo chmod +x scripts/build-dev.sh scripts/wait-for-it.sh
 	./scripts/build-dev.sh
 
 ## For building only server image
@@ -64,16 +64,16 @@ images:
 	sudo docker images
 
 web-server:
-	sudo docker exec -it web-server /bin/bash
+	sudo docker exec -it web-server-synet /bin/bash
 
 server:
-	sudo docker exec -it server /bin/bash
+	sudo docker exec -it server-synet /bin/bash
 
 client:
-	sudo docker exec -it client /bin/bash
+	sudo docker exec -it client-synet /bin/bash
 
 cache-lru:
-	sudo docker exec -it cache-lru /bin/bash
+	sudo docker exec -it cache-lru-synet /bin/bash
 
 cache-mru:
-	sudo docker exec -it cache-mru /bin/bash
+	sudo docker exec -it cache-mru-synet /bin/bash
