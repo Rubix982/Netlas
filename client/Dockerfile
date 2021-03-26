@@ -1,10 +1,13 @@
-FROM node:alpine
+FROM node
 
 WORKDIR /App
 
-COPY . /App
+COPY ./package.json /App/
+
+COPY ./yarn.lock /App/
 
 RUN yarn
-RUN yarn build
 
-CMD [ "yarn", "run", "develop"] 
+COPY ./ /App/
+
+CMD ["yarn","start"]

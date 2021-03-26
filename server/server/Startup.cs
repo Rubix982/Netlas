@@ -52,7 +52,7 @@ namespace server
 
             app.Use(async (context, nextMiddleware) => {
                 context.Response.OnStarting(() => {
-                    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:8000");
+                    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:9000");
                     context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
                     context.Response.StatusCode = 200;
                     return Task.FromResult(0);
