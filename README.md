@@ -104,17 +104,17 @@ This section should lists the technologies used,
 
 The list of requirements that have been fulfilled uptil now with respect to the uploaded assignment document have been listed here,
 
-- [ ] Connect the proxy with the browser
+- [ ] Connect the proxy with the browser, no idea
 - [X] Admin Console
 - [X] Filtering Rules
 - [X] HTTP Connection
-- [ ] Concurrency Management ( ??? )
-- [ ] HTTPS Connection
+- [ ] Concurrency Management, estimate 1 hour
+- [ ] HTTPS Connection, estimate 2-3 hours
 - [X] Caching
   - [X] LRU Algorithm
   - [X] LFU Algorithm
   - [X] Redis Integration
-  - [ ] Redis caching
+  - [ ] Redis caching, estimate 2-3 hours
     - [ ] How to measure performance
     - [ ] How to find out if the caching is helpful
 

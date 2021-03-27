@@ -15,10 +15,7 @@
             "cwd": "${workspaceFolder}/server/DotNetCore.WebApi.Docker.Demo",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false,
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-            },
+            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",

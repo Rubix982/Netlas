@@ -21,7 +21,13 @@ services:
     restart: always
     volumes:
       - "./server:/server"  
-      - "./scripts/data/encodings.csv:/app/encodings.csv"    
+      - "./scripts/data/encodings.csv:/app/encodings.csv"  
+      - "./server/.aspnet/https/:/https/"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Synet
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx    
     ports:
       - "80:80"
       - "443:443"
