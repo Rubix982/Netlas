@@ -1,13 +1,21 @@
+# Get the latest NodeJS image from DockerHub
 FROM node
 
+# set working directory
 WORKDIR /App
 
-COPY ./package.json /App/
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-COPY ./yarn.lock /App/
+# copy lock files to App
+COPY package.json /App/
+COPY yarn.lock /App/
 
-RUN yarn
+# install app dependencies
+RUN yarn && yarn global add react-scripts 
 
-COPY ./ /App/
+# add app
+COPY . /App/
 
-CMD ["yarn","start"]
+# start app
+CMD ["yarn", "start"]

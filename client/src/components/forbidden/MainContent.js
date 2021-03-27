@@ -45,6 +45,10 @@ const styles = () => ({
 });
 
 function ForbiddenContent({ classes }) {
+  fetch('http://localhost/forbidden')
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
   return (
     <div className={`${classes.bodyStyle} ${classes.allStyle}`}>
       <use>

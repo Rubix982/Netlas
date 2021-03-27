@@ -28,13 +28,15 @@ services:
 
   client:
     container_name: client-synet
-    build: ./client
+    build: 
+      context: ./client
     stdin_open: true
     restart: always
     volumes:
       - "./client:/App"
+      - "./client/node_modules:/App/node_modules"
     ports:
-      - "9000:9000"
+      - "3000:3000"
     depends_on:
       - "server"
  
