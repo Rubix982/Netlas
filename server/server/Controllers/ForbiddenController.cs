@@ -12,7 +12,7 @@ namespace server.Controllers
     public class ForbiddenController : ControllerBase
     {
 
-        private String path = @"data.json";
+        private String path = @"forbiddenDomains.json";
 
         private String data = "";
 
@@ -44,7 +44,7 @@ namespace server.Controllers
             {
                 var errorResponse = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
-                    Content = new StringContent("Data.JSON file was not found: ", System.Text.Encoding.UTF8, "text/plain"),
+                    Content = new StringContent("forbiddenDomains.json file was not found: ", System.Text.Encoding.UTF8, "text/plain"),
                     StatusCode = HttpStatusCode.NotFound
                 };
                 throw new HttpResponseException(errorResponse);
