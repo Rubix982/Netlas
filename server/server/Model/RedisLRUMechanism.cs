@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BeetleX.Redis;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace server
 {
