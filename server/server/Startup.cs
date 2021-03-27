@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +24,34 @@ namespace server
         {
 
             services.AddControllers();
-                // .AddNewtonsoftJson();
+
+            services.AddHsts(options => {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                options.ExcludedHosts.Add("localhost");
+            });
+
+            services.AddHttpsRedirection(options => 
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
+
+            /*
+            * https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-2.2&tabs=visual-studio&source=docs
+            * IHostingEnvironment (stored in _env) is injected into the Startup class.
+            * Yet, no variable as _env is found
+            */
+            // if (!_env.IsDevelopment())
+            // {
+            //     services.AddHttpsRedirection(options =>
+            //     {
+            //         options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            //         options.HttpsPort = 443;
+            //     });
+            // };
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "server", Version = "v1" });
@@ -61,6 +90,8 @@ namespace server
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

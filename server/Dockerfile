@@ -10,9 +10,10 @@ RUN dotnet restore -r linux-x64
 COPY server/. ./server/
 WORKDIR /source/server
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained false
+# dotnet dev-certs https --trust
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal-amd64
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["./server"]
+ENTRYPOINT ["./server"] 

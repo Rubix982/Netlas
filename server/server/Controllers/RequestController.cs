@@ -69,9 +69,7 @@ namespace server.Controllers
                 }
             }
 
-            Console.WriteLine(domain);
             domain = ConvertToUTF8Standard(domain);
-            Console.WriteLine(domain);
 
             // Make HTTP request, yay! Finally
             return await HttpInvokeGetAsync(domain, clientId, requestId);
@@ -112,13 +110,10 @@ namespace server.Controllers
                 return await t1;
             }
 
-            // Console.WriteLine($"{captured}");
-
             try
             {
                 Task<server.Request> t2 = Task<server.Request>.Run(() =>
                 {
-                    Console.WriteLine(uri);
                     server.Request response = new server.Request()
                     {
                         Domain = uri.Substring(11, uri.Length - 11),
