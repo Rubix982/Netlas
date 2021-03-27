@@ -46,8 +46,10 @@ namespace server
 
             app.Use(async (context, nextMiddleware) => {
                 context.Response.OnStarting(() => {
-                    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:9000");
+                    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
                     context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+                    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+                    context.Response.Headers.Add("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
                     context.Response.StatusCode = 200;
                     return Task.FromResult(0);
                 });
