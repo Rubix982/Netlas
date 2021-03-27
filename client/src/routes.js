@@ -11,6 +11,7 @@ import Register from 'src/pages/Register';
 import Settings from 'src/pages/Settings';
 import Forbidden from 'src/pages/Forbidden';
 import BadRequest from 'src/pages/BadRequest';
+import BanList from 'src/pages/Ban';
 
 const routes = [
   {
@@ -22,6 +23,7 @@ const routes = [
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
+      { path: 'ban', element: <BanList /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

@@ -76,35 +76,35 @@ const items = [
     title: 'Error'
   },
   {
-    href: '/Authorization',
+    href: '/app/Ban',
+    icon: BanIcon,
+    title: 'Ban'
+  },
+  {
+    href: '/app/Authorization',
     icon: KeyIcon,
     title: 'Authorization'
   },
   {
-    href: '/Database',
+    href: '/app/Database',
     icon: DatabaseIcon,
     title: 'Database'
   },
   {
-    href: '/Storage',
+    href: '/app/Storage',
     icon: StorageIcon,
     title: 'Storage'
   },
   {
-    href: '/Hosting',
+    href: '/app/Hosting',
     icon: HostingIcon,
     title: 'Hosting'
   },
   {
-    href: '/Functions',
+    href: '/app/Functions',
     icon: FunctionsIcon,
     title: 'Functions'
   },
-  {
-    href: '/Ban',
-    icon: BanIcon,
-    title: 'Ban'
-  }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
