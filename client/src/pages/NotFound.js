@@ -4,11 +4,13 @@ import {
   Container,
   Typography
 } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => (
   <>
     <Helmet>
-      <title>404 | Material Kit</title>
+      <title>404</title>
     </Helmet>
     <Box
       sx={{
@@ -38,7 +40,7 @@ const NotFound = () => (
         <Box sx={{ textAlign: 'center' }}>
           <img
             alt="Under development"
-            src="/static/images/undraw_page_not_found_su7k.svg"
+            src="/static/images/not_found.experiment.svg"
             style={{
               marginTop: 50,
               display: 'inline-block',
@@ -46,6 +48,11 @@ const NotFound = () => (
               width: 560
             }}
           />
+        </Box>
+        <Box sx={{ textAlign: 'center' }}>
+          <Button align="center" variant="contained" color="primary" onClick={() => { <Link to="/" />; }}>
+            Go To Dashboard
+          </Button>
         </Box>
       </Container>
     </Box>
