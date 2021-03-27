@@ -78,10 +78,12 @@ Repository for CN CS307's 1st assignment for web proxies. Please see the actual 
 
 The notion page for this repository can be found as the following,
 
+<div>
 <iframe
   src="https://www.notion.so/CN-Assignment-1-88106ce5c57d428ba42a8869e622d38c"
   style="width:100%; height:300px;"
 ></iframe>
+</div>
 
 ### Built With
 
