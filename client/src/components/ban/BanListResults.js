@@ -87,13 +87,13 @@ const BanListResults = ({ customers, ...rest }) => {
                   Email
                 </TableCell>
                 <TableCell>
-                  Location
+                  Domain Name
                 </TableCell>
                 <TableCell>
-                  Phone
+                  IP
                 </TableCell>
                 <TableCell>
-                  Registration date
+                  Added Date
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -136,13 +136,14 @@ const BanListResults = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {customer.domainName}
+                    {/* {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`} */}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {customer.ip}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {moment(customer.addedDate).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
               ))}

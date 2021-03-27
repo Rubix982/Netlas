@@ -8,6 +8,7 @@ import {
   SvgIcon
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
+import BanDialog from './BanDialog';
 
 const BanListToolbar = (props) => (
   <Box {...props}>
@@ -23,12 +24,7 @@ const BanListToolbar = (props) => (
       <Button sx={{ mx: 1 }}>
         Export
       </Button>
-      <Button
-        color="primary"
-        variant="contained"
-      >
-        Add customer
-      </Button>
+      <BanDialog />
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>
@@ -48,7 +44,7 @@ const BanListToolbar = (props) => (
                   </InputAdornment>
                 )
               }}
-              placeholder="Search customer"
+              placeholder="Search domain"
               variant="outlined"
             />
           </Box>
