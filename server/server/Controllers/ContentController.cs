@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Net;
+using Microsoft.VisualBasic;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
@@ -27,11 +28,55 @@ namespace server.Controllers
             _logger = logger;
         }
 
-        [HttpGet("")]
-        public async Task<string> Domain(string domain,
-            Int32 clientId,
-            Int32 requestId)
+        // [HttpGet("/{domain}/")]
+        // public IActionResult NoParams()
+        // {
+        //     Console.WriteLine("Heeeerreee");
+        //     return new JavaScriptResult("console.log('Hello, World!');");
+        // }
+
+        // [HttpGet("/{domain}/", Name = "Only_Domain")]
+        // public RedirectResult ParamsOnlyDomain(string domain)
+        // {
+        //     Console.WriteLine("Heeeerreee - 1");
+        //     return Redirect("http://localhost:3000/badrequest");
+        // }
+
+        // [HttpGet("/{domain}/{id}/", Name = "Unknown_ID")]
+        // public RedirectResult ParamsNoRequestID(string domain, Int32 id)
+        // {
+        //     Console.WriteLine("Heeeerreee - 2");
+        //     return Redirect("http://localhost:3000/badrequest");
+        // }
+
+        public RedirectResult ForbiddenRequest()
         {
+            Console.WriteLine("Heeeerreee - 3");
+            return Redirect("http://localhost/forbidden");
+        }
+
+        public RedirectResult ResponseEmpty()
+        {
+            Console.WriteLine("Heeeerreee - 4");
+            return Redirect("http://localhost:3000/404");
+        }
+
+        public RedirectResult InternalControllerError()
+        {
+            Console.WriteLine("Heeeerreee - 5");
+            return Redirect("http://localhost:3000/internal");
+        }
+
+        [HttpGet("", Name = "All_Content")]
+        public async Task<string> Domain(string domain = "",
+            Int32 clientId = -1,
+            Int32 requestId = -1)
+        {
+            if (clientId == -1 || requestId == -1 || domain == "")
+            {
+                return "Parameters not given!";
+            }
+
             try
             {
                 checkPathExistence(path);
@@ -55,11 +100,14 @@ namespace server.Controllers
                 $"www.{name}" == domain ||
                 $"{name}" == domain)
                 {
-                    Redirect("http://172.30.0.5:3000/forbidden");
+                    // return Redirect("http://localhost:3000/forbidden");
+                    RedirectToAction("ForbiddenRequest", "Content");
                 }
             }
 
+            Console.WriteLine(domain);
             domain = ConvertToUTF8Standard(domain);
+            Console.WriteLine(domain);
 
             // Make HTTP request, yay! Finally
             return await HttpInvokeGetAsync(domain, clientId, requestId);
@@ -83,7 +131,7 @@ namespace server.Controllers
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
                 Console.WriteLine("Message :{0} ", e.Message);
 
-                Redirect("http://172.30.0.5:3000/badrequest");
+                RedirectToAction("ResponseEmpty", "Content");
             }
 
             try
@@ -100,8 +148,8 @@ namespace server.Controllers
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while initiating Response object!");
                 Console.WriteLine("Message :{0} ", e.Message);
 
-                // Redirecting to bad request
-                Redirect("http://172.30.0.5:3000/badrequest");                
+                // return Redirecting to bad request
+                RedirectToAction("InternalControllerError", "Content");
             }
 
             return "No content found";
@@ -167,11 +215,12 @@ namespace server.Controllers
             {
                 while (csv.Read())
                 {
-                    server.Encoding record = csv.GetRecord<Encoding>();
-                    if (uri.Contains(record.UTF8String))
-                    {
-                        uri.Replace(record.UTF8String, record.UTF8Encoding);
-                    }
+                    // Console.WriteLine(csv.ToString());
+                    // server.Encoding record = csv.GetRecord<Encoding>();
+                    // if (uri.Contains(record.UTF8String))
+                    // {
+                    //     uri.Replace(record.UTF8String, record.UTF8Encoding);
+                    // }
                 }
                 return uri;
             }
