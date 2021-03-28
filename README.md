@@ -111,7 +111,7 @@ The list of requirements that have been fulfilled uptil now with respect to the 
 - [X] Filtering Rules
 - [X] HTTP Connection
 - [ ] Concurrency Management, estimate 1 hour
-- [ ] HTTPS Connection, estimate 2-3 hours
+- [X] HTTPS Connection
 - [X] Caching
   - [X] LRU Algorithm
   - [X] LFU Algorithm
