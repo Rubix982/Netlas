@@ -51,27 +51,20 @@ const styles = () => ({
   }
 });
 
-function BadRequestContent({ classes }) {
+function InternalErrorContent({ classes }) {
   return (
     <div className={`${classes.bodyStyle} ${classes.allStyle}`}>
-      <img src="/static/icons/dizzy.svg" className={`${classes.whistle}`} alt="dizzy" />
-      <h1 className={classes.h1Style}>400</h1>
-      <h2 className={classes.h2Style}>The request sent was not valid</h2>
-      <p className={classes.pStyle}>Please check the URL once again for correctness</p>
-      <p className={classes.noteStyle}>
-        Pssstt, did you forget to give the three arguments?
-        <strong> Domain</strong>
-        ,
-        <strong>ClientID</strong>
-        ,
-        <strong>RequestID?</strong>
-      </p>
+      <img src="/static/icons/fire.svg" className={`${classes.whistle}`} alt="dizzy" />
+      <h1 className={classes.h1Style}>500</h1>
+      <h2 className={classes.h2Style}>Internal Server Error!</h2>
+      <p className={classes.pStyle}>The server crashed for some reason! We&apos;ll get back to you soon</p>
+      <p className={classes.noteStyle}>The server was unable to return any response for some reason</p>
     </div>
   );
 }
 
-BadRequestContent.propTypes = {
+InternalErrorContent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BadRequestContent);
+export default withStyles(styles)(InternalErrorContent);

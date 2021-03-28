@@ -12,6 +12,7 @@ import Settings from 'src/pages/Settings';
 import Forbidden from 'src/pages/Forbidden';
 import BadRequest from 'src/pages/BadRequest';
 import BanList from 'src/pages/Ban';
+import InternalServerCrash from 'src/pages/Internal';
 
 const routes = [
   {
@@ -34,8 +35,9 @@ const routes = [
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
-      { path: '/forbidden', element: <Forbidden /> },
-      { path: '/badrequest', element: <BadRequest /> },
+      { path: 'forbidden', element: <Forbidden /> },
+      { path: 'badrequest', element: <BadRequest /> },
+      { path: 'internal', element: <InternalServerCrash /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> },
     ]
