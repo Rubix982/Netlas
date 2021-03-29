@@ -3,6 +3,8 @@ import requests as req
 import json
 import os
 
+req.packages.urllib3.disable_warnings() 
+
 # For the 'verify=False' in the below request being made
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
@@ -16,7 +18,7 @@ domain_names = ['facebook.com', 'linkedin.com',
                 'jsonplaceholder.typicode.com/posts/1/comments', 'jsonplaceholder.typicode.com/comments?postId=1']
 
 folder_path = str(os.path.abspath(__file__))[
-    0:-len(os.path.basename(__file__))] + "logs/"
+    0:-len(os.path.basename(__file__))] + "dist/logs/"
 
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
@@ -45,12 +47,12 @@ for idx, name in enumerate(domain_names):
 
         if '/' in data['domain']:
             data['domain'] = data['domain'].replace('https://', '')
-            data['domain'] = data['domain'].replace('https://', '')
+            data['domain'] = data['domain'].replace('/', '.')
 
         with open(os.path.join(folder_path + "metadata/", f"{data['domain']}.json"), mode='w') as file:
             select_data = data.pop('content', None)
             json.dump(
                 data, file)
 
-        with open(os.path.join(folder_path + "content/", f"{data['domain']}.json"), mode='w') as file:
-            json.dump(select_data, file)
+        with open(os.path.join(folder_path + "content/", f"{data['domain']}.html"), mode='w') as file:
+            file.write(select_data)

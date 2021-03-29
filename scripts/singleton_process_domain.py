@@ -72,5 +72,6 @@ def process_domains(domain_name: list):
             json.dump(
                 data, file)
 
-        with open(os.path.join(f"{content_folder}", f"{data['domain']}.json"), mode='w') as file:
-            json.dump(select_data, file)
+        with open(os.path.join(f"{content_folder}", f"{data['domain']}.html"), mode='w') as file:
+            # json.dump(select_data, file)
+            file.write(select_data)

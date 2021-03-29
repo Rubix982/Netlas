@@ -26,10 +26,6 @@ def get_csv_domain_data():
     return data[0:-1]
 
 
-def f(x):
-    return x*x
-
-
 if __name__ == '__main__':
 
     # Get CSV data
