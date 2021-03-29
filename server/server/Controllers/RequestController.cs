@@ -1,11 +1,13 @@
 using System;
-using System.Globalization;
 using System.IO;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Diagnostics;
+using System.Globalization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CsvHelper;
@@ -62,7 +64,8 @@ namespace server.Controllers
                         Title = name,
                         ClientId = clientId,
                         RequestId = requestId,
-                        StatusCode = 500
+                        StatusCode = 404,
+                        isFromCache = false,
                     };
 
                     return response;
@@ -83,6 +86,9 @@ namespace server.Controllers
             // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
             HttpClient client = new HttpClient();
 
+            Stopwatch stopWatch = new Stopwatch();
+
+            stopWatch.Start();
             try
             {
                 // https://stackoverflow.com/questions/6045343/how-to-make-an-asynchronous-method-return-a-value
@@ -90,8 +96,21 @@ namespace server.Controllers
             }
             catch (Exception e)
             {
+                // Stop the stop watch
+                stopWatch.Stop();
+
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}.{4:00}:{5:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10, ts.TotalMilliseconds / 100, ts.Ticks);
+
+                // Error messages    
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
                 Console.WriteLine("Message :{0} ", e.Message);
+
                 Task<server.Request> t1 = Task<server.Request>.Run(() =>
                 {
                     server.Request response = new server.Request()
@@ -101,7 +120,9 @@ namespace server.Controllers
                         Title = uri,
                         ClientId = clientId,
                         RequestId = requestId,
-                        StatusCode = 400 // Bad Request, apparently. :S
+                        StatusCode = 400, // Bad Request, apparently. :S
+                        RequestTimeMeasured = elapsedTime, // the time calculation
+                        isFromCache = false // NOPE! Lazy insaan
                     };
 
                     return response;
@@ -112,6 +133,17 @@ namespace server.Controllers
 
             try
             {
+                // Stop the stop watch
+                stopWatch.Stop();
+
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+
                 Task<server.Request> t2 = Task<server.Request>.Run(() =>
                 {
                     server.Request response = new server.Request()
@@ -121,7 +153,9 @@ namespace server.Controllers
                         Title = uri,
                         ClientId = clientId,
                         RequestId = requestId,
-                        StatusCode = 200 // OK!!!! :D
+                        StatusCode = 200, // OK!!!! :D
+                        RequestTimeMeasured = elapsedTime,
+                        isFromCache = false, // NOPE
                     };
 
                     return response;
@@ -131,8 +165,22 @@ namespace server.Controllers
             }
             catch (Exception e)
             {
+
+                // Stop the stop watch
+                stopWatch.Stop();
+
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+
+                // Error message
                 Console.WriteLine("\nException Caught In HttpInvokeGetAsync while initiating Response object!");
                 Console.WriteLine("Message :{0} ", e.Message);
+
                 server.Request response = new server.Request()
                 {
                     Domain = uri,
@@ -140,7 +188,9 @@ namespace server.Controllers
                     Title = uri,
                     ClientId = clientId,
                     RequestId = requestId,
-                    StatusCode = 500 // Bad news, brother
+                    StatusCode = 500, // Bad news, brother
+                    RequestTimeMeasured = elapsedTime, // Time calculation
+                    isFromCache = false, // NOPE!
                 };
 
                 return response;
@@ -208,10 +258,10 @@ namespace server.Controllers
                 while (csv.Read())
                 {
                     server.Encoding record = csv.GetRecord<Encoding>();
-                    if ( uri.Contains(record.UTF8String) )
+                    if (uri.Contains(record.UTF8String))
                     {
                         uri.Replace(record.UTF8String, record.UTF8Encoding);
-                    } 
+                    }
                 }
                 return uri;
             }

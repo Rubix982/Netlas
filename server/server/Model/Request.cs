@@ -16,5 +16,10 @@ namespace server
 
         // Status code - to indicate the status of the resource returned
         public Int32 StatusCode { get; set; }
+
+        // RequestTimeMeasured - for calculating stop watch time
+        public String RequestTimeMeasured { get; set; }
+
+        public Boolean isFromCache { get; set; }
     }
 }
