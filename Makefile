@@ -1,15 +1,28 @@
 # Automating Scripts
 python-test:
-	python3 ./scripts/get-requests.py
+	python3 ./scripts/get_requests.py
 
 python-encodings:
-	python3 ./scripts/get-url-special-encodings.py
+	python3 ./scripts/get_url_special_encodings.py
 
 python-fetch-results:
 	python3 ./scripts/multithread_domains.py
 
 python-fetch-domain-names:
 	pytohn3: ./scripts/get_authoritative_domain_names.py
+
+rm-dist:
+	rm -rf ./scripts/dist/
+
+generate-multiprocess-graph:
+	cd scripts/
+	python3 ./generate_graphs_multiprocess.py
+	cd ..
+
+generate-request-graph:
+	cd scripts/
+	python3 ./generate_graphs_request_test.py
+	cd ..
 
 stop:
 	docker container stop $(docker ps -q)
