@@ -369,3 +369,6 @@ server/server/bin/**/**
 
 ## Data from Docker, for volume mapping
 data/**/**
+
+## Data generated from scripts
+scripts/dist/**/**

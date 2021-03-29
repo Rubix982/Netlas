@@ -58,14 +58,14 @@ services:
     environment: 
       REDIS_REPLICATION_MODE: master
   
-  cache-mru:
-    container_name: cache-mru-synet
+  cache-lfu:
+    container_name: cache-lfu-synet
     image: redis
     restart: always
     ports: 
       - "6380:6380"
     volumes:
-      - "./data/redis-mru/redis-data:/var/lib/redis"
-      - "./data/redis-mru/redis.conf:/usr/local/etc/redis/redis.conf"
+      - "./data/redis-lfu/redis-data:/var/lib/redis"
+      - "./data/redis-lfu/redis.conf:/usr/local/etc/redis/redis.conf"
     environment: 
       REDIS_REPLICATION_MODE: master   

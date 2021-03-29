@@ -12,7 +12,7 @@ const BanList = () => {
   const finalObjectsToSend = [];
 
   React.useEffect(async () => {
-    const response = await API.getRequest('http://localhost/forbidden');
+    const response = await API.getRequest('https://localhost/forbidden');
 
     response.domains.forEach((item) => {
       finalObjectsToSend.push({

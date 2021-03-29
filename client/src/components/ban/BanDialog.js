@@ -35,7 +35,7 @@ export default function BanDialog() {
       * This should be a POST request - not a GET request!
       TODO: Needs to be updated on the server side
       */
-      const response = await API.getRequest(`http://localhost/addforbidden?newForbidden=${inputElement.current.value}`);
+      const response = await API.getRequest(`https://localhost/addforbidden?newForbidden=${inputElement.current.value}`);
       if (response.statusCode === '304') {
         console.log(`304 - ${response.responseMessage}`);
       } else if (response.statusCode === '200') {

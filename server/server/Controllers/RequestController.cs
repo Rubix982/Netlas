@@ -116,9 +116,9 @@ namespace server.Controllers
                 {
                     server.Request response = new server.Request()
                     {
-                        Domain = uri.Substring(11, uri.Length - 11),
+                        Domain = uri,
                         Content = capturedResponseContent,
-                        Title = uri.Substring(11, uri.Length - 11),
+                        Title = uri,
                         ClientId = clientId,
                         RequestId = requestId,
                         StatusCode = 200 // OK!!!! :D
@@ -135,12 +135,12 @@ namespace server.Controllers
                 Console.WriteLine("Message :{0} ", e.Message);
                 server.Request response = new server.Request()
                 {
-                    Domain = uri.Substring(0, 11),
+                    Domain = uri,
                     Content = e.Message,
-                    Title = uri.Substring(0, 11),
+                    Title = uri,
                     ClientId = clientId,
                     RequestId = requestId,
-                    StatusCode = 200 // OK!!!! :D
+                    StatusCode = 500 // Bad news, brother
                 };
 
                 return response;
@@ -159,7 +159,7 @@ namespace server.Controllers
                 {
                     HttpResponseMessage response = await client.GetAsync(uri);
                     response.EnsureSuccessStatusCode();
-                    Console.WriteLine($"{uri} {response.Headers}");
+                    // Console.WriteLine($"{uri} {response.Headers}");
                     string responseBody = await response.Content.ReadAsStringAsync();
                     return responseBody;
                 });
