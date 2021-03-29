@@ -106,11 +106,11 @@ This section should lists the technologies used,
 
 The list of requirements that have been fulfilled uptil now with respect to the uploaded assignment document have been listed here,
 
-- [ ] Connect the proxy with the browser, no idea
+- [X] Connect the proxy with the browser - just going to stick with Python automation ( *I guess it's valid!* )
 - [X] Admin Console
 - [X] Filtering Rules
 - [X] HTTP Connection
-- [ ] Concurrency Management, estimate 1 hour
+- [X] Concurrency Management
 - [X] HTTPS Connection
 - [X] Caching
   - [X] LRU Algorithm

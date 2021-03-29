@@ -5,6 +5,12 @@ python-test:
 python-encodings:
 	python3 ./scripts/get-url-special-encodings.py
 
+python-fetch-results:
+	python3 ./scripts/multithread_domains.py
+
+python-fetch-domain-names:
+	pytohn3: ./scripts/get_authoritative_domain_names.py
+
 stop:
 	docker container stop $(docker ps -q)
 
