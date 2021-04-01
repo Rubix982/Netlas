@@ -49,23 +49,23 @@ namespace server.Controllers
         //     return Redirect("http://localhost:3000/badrequest");
         // }
 
-        public RedirectResult ForbiddenRequest()
-        {
-            Console.WriteLine("Heeeerreee - 3");
-            return Redirect("http://localhost/forbidden");
-        }
+        // public RedirectResult ForbiddenRequest()
+        // {
+        //     Console.WriteLine("Heeeerreee - 3");
+        //     return Redirect("http://localhost/forbidden");
+        // }
 
-        public RedirectResult ResponseEmpty()
-        {
-            Console.WriteLine("Heeeerreee - 4");
-            return Redirect("http://localhost:3000/404");
-        }
+        // public RedirectResult ResponseEmpty()
+        // {
+        //     Console.WriteLine("Heeeerreee - 4");
+        //     return Redirect("http://localhost:3000/404");
+        // }
 
-        public RedirectResult InternalControllerError()
-        {
-            Console.WriteLine("Heeeerreee - 5");
-            return Redirect("http://localhost:3000/internal");
-        }
+        // public RedirectResult InternalControllerError()
+        // {
+        //     Console.WriteLine("Heeeerreee - 5");
+        //     return Redirect("http://localhost:3000/internal");
+        // }
 
         [HttpGet("", Name = "All_Content")]
         public async Task<string> Domain(string domain = "",
@@ -105,9 +105,7 @@ namespace server.Controllers
                 }
             }
 
-            Console.WriteLine(domain);
             domain = ConvertToUTF8Standard(domain);
-            Console.WriteLine(domain);
 
             // Make HTTP request, yay! Finally
             return await HttpInvokeGetAsync(domain, clientId, requestId);

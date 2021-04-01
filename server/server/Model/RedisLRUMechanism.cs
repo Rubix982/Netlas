@@ -9,23 +9,23 @@ namespace server
         public RedisDB DB { get; }
         static private Node Head { get; set; }
         static private Node Tail { get; set; }
-        static private Dictionary<Int64, Node> Map = new Dictionary<Int64, Node>();
+        static private Dictionary<string, Node> Map = new Dictionary<string, Node>();
 
         static private Int64 Capacity { get; set; } = 0;
 
         public RedisLRUMechanism(string hostName,
             int portNumber, Int64 capacity)
         {
-            DB = new RedisDB(1);
-            DB.Host.AddWriteHost(hostName, portNumber);
+            // DB = new RedisDB(1);
+            // DB.Host.AddWriteHost(hostName, portNumber);
             Capacity = capacity;
         }
 
-        public Int64 GetKey(Int64 key)
+        public string GetKey(string key)
         {
             if (!Map.ContainsKey(key))
             {
-                return -1;
+                return "";
             }
 
             //move to tail
@@ -37,7 +37,7 @@ namespace server
             return newNode.Value;
         }
 
-        public void PutKey(Int64 key, Int64 value)
+        public void PutKey(string key, string value)
         {
             if (Map.ContainsKey(key))
             {

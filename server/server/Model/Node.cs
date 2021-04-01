@@ -4,12 +4,12 @@ namespace server
 {
     class Node
     {
-        public Int64 Key;
-        public Int64 Value;
+        public String Key;
+        public String Value;
         public Node Prev;
         public Node Next;
 
-        public Node(Int64 key, Int64 value)
+        public Node(String key, String value)
         {
             Key = key;
             Value = value;

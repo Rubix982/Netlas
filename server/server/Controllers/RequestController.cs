@@ -4,11 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
-using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -23,6 +23,12 @@ namespace server.Controllers
         private String path = @"forbiddenDomains.json";
         private String data = "";
         private String capturedResponseContent = "";
+
+        private bool isFromCache { get; set; } = true;
+
+        static private RedisLRUMechanism LRUMechanism { get; set; } = new RedisLRUMechanism("abcd", 2020, 3);
+
+        static private RedisLFUMechanism LFUMechanism { get; set; } = new RedisLFUMechanism("abcd", 2020, 3);
 
         public RequestController(ILogger<RequestController> logger)
         {
@@ -89,15 +95,57 @@ namespace server.Controllers
             Stopwatch stopWatch = new Stopwatch();
 
             stopWatch.Start();
+
             try
             {
-                // https://stackoverflow.com/questions/6045343/how-to-make-an-asynchronous-method-return-a-value
-                capturedResponseContent = await AsyncResourceAlloc(client, uri);
+                capturedResponseContent = LRUMechanism.GetKey(uri);
+                if (capturedResponseContent == "")
+                {
+                    goto LFUCache;
+                }
+                goto ToTheEnd;
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
+            }
+
+        LFUCache:
+            try
+            {
+                capturedResponseContent = LFUMechanism.GetKey(uri);
+                if (capturedResponseContent == "")
+                {
+                    goto GetAsyncResult;
+                }
+                LRUMechanism.PutKey(uri, capturedResponseContent);
+                goto ToTheEnd;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        GetAsyncResult:
+            try
+            {
+                isFromCache = false;
+                capturedResponseContent = await AsyncResourceAlloc(client, uri);
+                // LFUMechanism.SetKey(uri, capturedResponseContent);
+                LRUMechanism.PutKey(uri, capturedResponseContent);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+        ToTheEnd:
+            stopWatch.Stop();
+
+            try
+            {
                 // Stop the stop watch
-                stopWatch.Stop();
 
                 // Get the elapsed time as a TimeSpan value.
                 TimeSpan ts = stopWatch.Elapsed;
@@ -107,22 +155,18 @@ namespace server.Controllers
                     ts.Hours, ts.Minutes, ts.Seconds,
                     ts.Milliseconds / 10, ts.TotalMilliseconds / 100, ts.Ticks);
 
-                // Error messages    
-                Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
-                Console.WriteLine("Message :{0} ", e.Message);
-
                 Task<server.Request> t1 = Task<server.Request>.Run(() =>
                 {
                     server.Request response = new server.Request()
                     {
                         Domain = uri,
-                        Content = e.Message,
+                        Content = capturedResponseContent,
                         Title = uri,
                         ClientId = clientId,
                         RequestId = requestId,
                         StatusCode = 400, // Bad Request, apparently. :S
                         RequestTimeMeasured = elapsedTime, // the time calculation
-                        isFromCache = false // NOPE! Lazy insaan
+                        isFromCache = this.isFromCache// NOPE! Lazy insaan
                     };
 
                     return response;
@@ -130,6 +174,62 @@ namespace server.Controllers
 
                 return await t1;
             }
+            catch (Exception e)
+            {
+                // Error messages    
+                Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
+                Console.WriteLine("Message :{0} ", e.Message);
+            }
+
+            // if ((capturedResponseContent = LRUMechanism.GetKey(uri)) == "")
+            // {
+            //     if ((capturedResponseContent = LFUMechanism.GetKey(uri)) == "")
+            //     {
+            //         try
+            //         {
+            //             isFromCache = false;
+            //             capturedResponseContent = await AsyncResourceAlloc(client, uri);
+            //             LFUMechanism.PutKey(uri, capturedResponseContent);
+            //         }
+            //         catch (Exception e)
+            //         {
+            //             // Stop the stop watch
+            //             stopWatch.Stop();
+
+            //             // Get the elapsed time as a TimeSpan value.
+            //             TimeSpan ts = stopWatch.Elapsed;
+
+            //             // Format and display the TimeSpan value.
+            //             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}.{4:00}:{5:00}",
+            //                 ts.Hours, ts.Minutes, ts.Seconds,
+            //                 ts.Milliseconds / 10, ts.TotalMilliseconds / 100, ts.Ticks);
+
+            //             // Error messages    
+            //             Console.WriteLine("\nException Caught In HttpInvokeGetAsync while retrieving from AsyncResourceAlloc!");
+            //             Console.WriteLine("Message :{0} ", e.Message);
+
+            //             Task<server.Request> t1 = Task<server.Request>.Run(() =>
+            //             {
+            //                 server.Request response = new server.Request()
+            //                 {
+            //                     Domain = uri,
+            //                     Content = e.Message,
+            //                     Title = uri,
+            //                     ClientId = clientId,
+            //                     RequestId = requestId,
+            //                     StatusCode = 400, // Bad Request, apparently. :S
+            //                     RequestTimeMeasured = elapsedTime, // the time calculation
+            //                     isFromCache = false // NOPE! Lazy insaan
+            //                 };
+
+            //                 return response;
+            //             });
+
+            //             return await t1;
+            //         }
+            //     }
+            //     LRUMechanism.PutKey(uri, capturedResponseContent);
+            // }
 
             try
             {
@@ -155,7 +255,7 @@ namespace server.Controllers
                         RequestId = requestId,
                         StatusCode = 200, // OK!!!! :D
                         RequestTimeMeasured = elapsedTime,
-                        isFromCache = false, // NOPE
+                        isFromCache = isFromCache, // NOPE
                     };
 
                     return response;

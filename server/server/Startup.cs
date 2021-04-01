@@ -1,4 +1,7 @@
 using System;
+using System.Net;
+using System.Web;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -25,14 +28,15 @@ namespace server
 
             services.AddControllers();
 
-            services.AddHsts(options => {
+            services.AddHsts(options =>
+            {
                 options.Preload = true;
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(60);
                 options.ExcludedHosts.Add("localhost");
             });
 
-            services.AddHttpsRedirection(options => 
+            services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
                 options.HttpsPort = 5001;
@@ -73,8 +77,10 @@ namespace server
                 app.UseHsts();
             }
 
-            app.Use(async (context, nextMiddleware) => {
-                context.Response.OnStarting(() => {
+            app.Use(async (context, nextMiddleware) =>
+            {
+                context.Response.OnStarting(() =>
+                {
                     context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
                     context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
                     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -97,6 +103,14 @@ namespace server
             {
                 endpoints.MapControllers();
             });
+
+            // var client = new SocketClient("127.0.0.1", 80);
+
+            // if (await client.Connect())
+            // {
+            //     await client.Send("Am I cool?");
+            //     var recData = await client.ReceiveBytes();
+            // }
         }
     }
 }
