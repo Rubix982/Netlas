@@ -131,7 +131,7 @@ namespace server.Controllers
             {
                 isFromCache = false;
                 capturedResponseContent = await AsyncResourceAlloc(client, uri);
-                // LFUMechanism.SetKey(uri, capturedResponseContent);
+                LFUMechanism.SetKey(uri, capturedResponseContent);
                 LRUMechanism.PutKey(uri, capturedResponseContent);
             }
             catch (Exception e)

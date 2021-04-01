@@ -46,12 +46,12 @@ namespace server
             {
                 Counts.Add(key, Count + 1);
             }
-            
+
 
             // Remove the element from the counter to LinkedHashSet
             Lists[Count].Remove(key);
 
-            
+
             // When the current     min does not have any data, next 
             // one would be the min
             if (Count == Minimum
@@ -65,7 +65,7 @@ namespace server
             {
                 Lists.Add(Count + 1, new LinkedHashSet<string>());
             }
-            
+
             Lists[Count].Add(key);
 
             return Vals[key];
@@ -102,19 +102,28 @@ namespace server
                 }
             }
 
+            Console.WriteLine("Hereererre");
+
             // If the key is new, insert the value and current
             // min should be 1 of course
             if (!Vals.ContainsKey(Key))
             {
                 Vals.Add(Key, Value);
             }
-       
+
             if (!Counts.ContainsKey(Key))
             {
                 Counts.Add(Key, 1);
             }
             Minimum = 1;
-            // Lists[Counts[Key]].Add(Key);
+            if (!Lists.ContainsKey(Minimum))
+            {
+                Lists.Add(Minimum, new LinkedHashSet<string>());
+            }
+            else
+            {
+                Lists[Minimum].Add(Key);
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace server
             // https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to?pivots=dotnet-5-0
             var json =
                 @"{""Domains"": [""facebook.com""]}";
-    
+
             var options = new JsonSerializerOptions
             {
                 IncludeFields = true,
@@ -26,11 +26,17 @@ namespace server
 
             var forecast = JsonSerializer.Deserialize<FilterJSON>(json, options);
 
-            var blockedDomains = new List<string>(){ "twitter.com", 
-                        "linkedin.com", "instagram.com", 
+            var blockedDomains = new List<string>(){ "twitter.com",
+                        "linkedin.com", "instagram.com",
                         "reddit.com", "youtube.com"};
             foreach (string domain in blockedDomains)
+            {
+                forecast.Domains.Add("https://www." + domain);
+                forecast.Domains.Add("https://" + domain);
+                forecast.Domains.Add("http://www." + domain);
+                forecast.Domains.Add("http://" + domain);
                 forecast.Domains.Add(domain);
+            }
 
             var roundTrippedJson =
                 JsonSerializer.Serialize<FilterJSON>(forecast, options);
