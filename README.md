@@ -72,6 +72,8 @@
 <!-- ABOUT THE assignment -->
 ## About The assignment
 
+ABANDONED REPO
+
 ### Overiew
 
 Repository for CN CS307's 1st assignment for web proxies. Please see the actual assignment sas attached [here](https://github.com/Rubix982/Synet/blob/main/assets/doc/A01-CN-SP21.pdf).
